@@ -15,10 +15,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -60,6 +58,4 @@ class MintosApplicationTests {
 		verify(locationRepository, times(0)).saveGeoIpData(any(GeoIpDTO.class));
 		verify(weatherRepository, times(0)).saveWeatherData(any(WeatherDTO.class));
 	}
-
-
 }
