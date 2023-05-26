@@ -55,7 +55,9 @@ public class GeoLocationService {
         final RestTemplate restTemplate = new RestTemplate();
         final String url = String.format(GEO_API_URL, ipAddress);
         GeoIpDTO geoIpDTO = restTemplate.getForObject(url, GeoIpDTO.class);
-        locationRepository.saveGeoIpData(geoIpDTO);
+        if (geoIpDTO != null) {
+            locationRepository.saveGeoIpData(geoIpDTO);
+        }
         return geoIpDTO;
     }
 }
