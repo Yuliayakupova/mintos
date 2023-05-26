@@ -20,7 +20,9 @@ public class WeatherRepository {
 
     public void saveWeatherData(WeatherDTO weatherData) {
         try{
-            String insertQuery = "INSERT INTO WeatherData (latitude, longitude, generationtime_ms, utc_offset_seconds, timezone, timezone_abbreviation, elevation) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO WeatherData (latitude, longitude, generationtime_ms, utc_offset_seconds, timezone, )" +
+                                  "timezone_abbreviation, elevation, hourly_units_time, hourly_units_temperature_2m) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            
             connection.update(insertQuery,
                     weatherData.getLatitude(),
                     weatherData.getLongitude(),
@@ -28,7 +30,9 @@ public class WeatherRepository {
                     weatherData.getUtc_offset_seconds(),
                     weatherData.getTimezone(),
                     weatherData.getTimezone_abbreviation(),
-                    weatherData.getElevation());
+                    weatherData.getElevation(),
+                    weatherData.getHourly_units().getTime(),
+                    weatherData.getHourly_units().getTemperature_2m());
         } catch (Exception e) {
             e.printStackTrace();
         }

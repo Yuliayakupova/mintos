@@ -38,7 +38,6 @@ public class WeatherService {
 
     public WeatherDTO getWeatherForRequest(GeoIpDTO geoIpDTO) {
         if (geoIpDTO != null) {
-            locationRepository.saveGeoIpData(geoIpDTO);
             WeatherDTO weatherDTO = getWeatherByCoordinates(geoIpDTO.getLoc());
             weatherRepository.saveWeatherData(weatherDTO);
             return weatherDTO;

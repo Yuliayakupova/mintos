@@ -24,9 +24,13 @@ public class WeatherController {
 
     @GetMapping("/weather")
     public ResponseEntity<WeatherDTO> getWeather(HttpServletRequest request) {
-        GeoIpDTO geoIpDTO = this.geoLocationService.getLocationByClientRequest(request);
-        WeatherDTO weatherDTO = this.weatherService.getWeatherForRequest(geoIpDTO);
 
+        GeoIpDTO geoIpDTO = this.geoLocationService.getLocationByClientRequest(request);
+        if (geoIpDTO == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        WeatherDTO weatherDTO = this.weatherService.getWeatherForRequest(geoIpDTO);
         if (weatherDTO != null) {
             return ResponseEntity.ok(weatherDTO);
         }
